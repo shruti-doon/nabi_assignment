@@ -1,11 +1,24 @@
 from pymongo import MongoClient
-from dotenv import load_dotenv
-import os
+from pymongo.errors import ServerSelectionTimeoutError
 
-# Load environment variables
-load_dotenv()
+# Create MongoDB client with error handling
+try:
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['therapist_db']
+    appointments_collection = db['appointments']
+except ServerSelectionTimeoutError as e:
+    print("Could not connect to MongoDB:", e)
 
-# MongoDB connection
-client = MongoClient(os.getenv("MONGODB_URI"))
-db = client.therapist_dashboard
-appointments_collection = db.appointments
+def get_appointments():
+    try:
+        return list(appointments_collection.find())
+    except Exception as e:
+        print(f"Error fetching appointments: {e}")
+        return []
+
+def add_appointment(data):
+    try:
+        return appointments_collection.insert_one(data)
+    except Exception as e:
+        print(f"Error adding appointment: {e}")
+        raise
