@@ -1,16 +1,44 @@
-# therapist_dashboard
+# Prerequisites
 
-A new Flutter project.
+Before you begin, ensure you have the following installed and set up:
+- An Android device or an emulator running.
+- Flutter installed on your system.
+- Python and necessary dependencies.
 
-## Getting Started
+## Step 1: Start the Backend
 
-This project is a starting point for a Flutter application.
+Run the following commands to set up and start the backend:
 
-A few resources to get you started if this is your first Flutter project:
+```sh
+# Clone the repository
+git clone https://github.com/shruti-doon/nabi_assignment.git
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Navigate to the backend directory
+cd nabi_assignment/backend
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Activate the virtual environment
+source .venv/bin/activate
+(check requirement.txt file once)
+
+# Start the backend server
+python app.py
+```
+
+## Step 2: Start the Frontend
+
+To start the frontend, execute the following commands:
+
+```sh
+# Navigate to the frontend directory
+cd ../frontend/therapist_dashboard
+
+# Run the Flutter application
+flutter run
+```
+
+## Notes
+- Ensure that your backend is running before starting the frontend.
+- If you encounter any issues, check that all dependencies are installed.
+
+
+

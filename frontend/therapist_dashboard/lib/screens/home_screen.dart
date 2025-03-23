@@ -51,14 +51,7 @@ class HomeScreen extends StatelessWidget {
                   image: AssetImage('assets/image.png'),
                   fit: BoxFit.cover,
                 ),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Color(0xFFD4A373).withOpacity(0.8), // Adjust color to match your design
-                  ],
-                ),
+              
               ),
             ),
           ),

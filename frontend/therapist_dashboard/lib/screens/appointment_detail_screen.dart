@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/appointment_model.dart';
-import 'dart:ui'; // Changed import for ImageFilter
 
 class AppointmentDetailScreen extends StatelessWidget {
   final Appointment appointment;
@@ -8,104 +7,99 @@ class AppointmentDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.black.withOpacity(0.5), // Reduced opacity for translucent effect
-      child: Scaffold(
-        backgroundColor: Colors.transparent, // Keep scaffold transparent
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.menu, color: Colors.white),
-              onPressed: () {},
-            ),
-          ],
+    return Scaffold(
+      // Use a semi-transparent background color instead of BackdropFilter
+      backgroundColor: Color(0xFFFFDCC7), // Adjust opacity as needed
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        body: BackdropFilter( // Add backdrop filter for blur effect
-          filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0), // Slight blur effect
-          child: Center(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Header with doctor info
-                  _buildHeader(),
-                  
-                  // Notes card
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Patient name heading
-                        Center(
-                          child: Text(
-                            "Notes for ${appointment.patientName}",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.menu, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header with doctor info
+              _buildHeader(),
+              
+              // Notes card
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Patient name heading
+                    Center(
+                      child: Text(
+                        "Notes for ${appointment.patientName}",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(height: 20),
-                        
-                        // Notes content
-                        Text(
-                          "Notes",
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    
+                    // Notes content
+                    Text(
+                      "Notes",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: SingleChildScrollView(
+                        child: Text(
+                          appointment.notes ?? "No notes available for this patient.",
                           style: TextStyle(
                             fontSize: 16,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                    
+                    // Read more button
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFBC8A9),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Text(
+                          "Read more",
+                          style: TextStyle(
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 8),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          child: SingleChildScrollView(
-                            child: Text(
-                              appointment.notes ?? "No notes available for this patient.",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-                        ),
-                        
-                        // Read more button
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 16),
-                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFFBC8A9),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Text(
-                              "Read more",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
