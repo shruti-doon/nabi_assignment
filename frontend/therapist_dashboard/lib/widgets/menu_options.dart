@@ -50,7 +50,7 @@ void showMenuOptions(BuildContext context) {
                         SizedBox(width: 8),
                         CircleAvatar(
                           radius: 20,
-                          backgroundImage: AssetImage('assets/doctor_profile.jpg'),
+                          backgroundImage: AssetImage('assets/doctor.png'),
                         ),
                       ],
                     ),

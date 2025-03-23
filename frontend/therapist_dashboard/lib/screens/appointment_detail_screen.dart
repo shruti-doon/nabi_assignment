@@ -9,7 +9,7 @@ class AppointmentDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black.withOpacity(0.5), // Reduced opacity for translucent effect
+      // color: Colors.black.withOpacity(0.5), // Reduced opacity for translucent effect
       child: Scaffold(
         backgroundColor: Colors.transparent, // Keep scaffold transparent
         appBar: AppBar(
@@ -120,7 +120,7 @@ class AppointmentDetailScreen extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundImage: AssetImage('assets/doctor_profile.jpg'),
+            backgroundImage: AssetImage('assets/doctor.png'),
             backgroundColor: Colors.grey.shade200,
           ),
           SizedBox(height: 10),

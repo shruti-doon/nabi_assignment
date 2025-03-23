@@ -3,7 +3,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 
 # Create MongoDB client with error handling
 try:
-    client = MongoClient('mongodb://localhost:27017/')
+    client = MongoClient('mongodb://10.0.2.2:27017/')
     db = client['therapist_db']
     appointments_collection = db['appointments']
 except ServerSelectionTimeoutError as e:
