@@ -1,21 +1,21 @@
 class Appointment {
-  final String id;
-  final String patientName;
-  final String email;
+  final String id;          // Required fields
+  final String patientName;  // Required fields
+  final String? email;       // Optional fields
   final String age;
   final String gender;
-  final String notes;
+  final String? notes;
   final String status;
-  final String time; 
+  final String time;
   final String date;
 
   Appointment({
     required this.id,
     required this.patientName,
-    required this.email,
+    this.email,
     required this.age,
     required this.gender,
-    required this.notes,
+    this.notes,
     required this.status,
     required this.time,
     required this.date,
@@ -23,15 +23,15 @@ class Appointment {
 
   factory Appointment.fromJson(Map<String, dynamic> json) {
     return Appointment(
-      id: json['_id'],
-      patientName: json['patientName'],
-      email: json['email'],
-      age: json['age'],
-      gender: json['gender'],
-      notes: json['notes'],
-      status: json['status'],
-      time: json['time'],
-      date: json['date'],
-      );
+      id: json['_id']?.toString() ?? '',
+      patientName: json['patientName']?.toString() ?? 'Unknown Patient',
+      email: json['email']?.toString(),
+      age: json['age']?.toString() ?? 'N/A',
+      gender: json['gender']?.toString() ?? 'Not specified',
+      notes: json['notes']?.toString(),
+      status: json['status']?.toString() ?? 'pending',
+      time: json['time']?.toString() ?? 'No time set',
+      date: json['date']?.toString() ?? 'No date set',
+    );
   }
 }

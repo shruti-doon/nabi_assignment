@@ -140,7 +140,7 @@ class AppointmentDetailScreen extends StatelessWidget {
 
   Widget _buildPatientInfoSection() {
     List<int> sessionNumbers = [1, 2, 3, 4];
-    
+
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       child: Column(
@@ -153,14 +153,14 @@ class AppointmentDetailScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              "10 March 2024",
+              appointment.date,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),
           ),
-          
+
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             decoration: BoxDecoration(
@@ -179,15 +179,13 @@ class AppointmentDetailScreen extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Profile Picture
                   CircleAvatar(
                     radius: 25,
                     backgroundImage: NetworkImage('https://via.placeholder.com/50'),
                     backgroundColor: Colors.grey.shade200,
                   ),
                   SizedBox(width: 12),
-                  
-                  // Patient Details
+
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,19 +193,19 @@ class AppointmentDetailScreen extends StatelessWidget {
                         Text(
                           appointment.patientName,
                           style: TextStyle(
-                            fontSize: 16, 
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          "${appointment.age}yrs, ${appointment.gender}",
+                          "${appointment.age}, ${appointment.gender}",
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black87,
                           ),
                         ),
                         Text(
-                          appointment.email,
+                          appointment.email ?? 'No email provided',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
@@ -216,8 +214,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
-                  // Time and Session Pills
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -228,7 +225,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          appointment.time ?? "4:00 pm - 5:00 pm",
+                          appointment.time ?? "Time not specified",
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,

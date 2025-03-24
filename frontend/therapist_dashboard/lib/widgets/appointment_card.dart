@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/appointment_model.dart';
 import 'session_pill.dart';
-import '../screens/appointment_detail_screen.dart'; // Ensure this import is correct
+import '../screens/appointment_detail_screen.dart';
 
 class AppointmentCardWidget extends StatelessWidget {
   final Appointment appointment;
@@ -10,12 +10,11 @@ class AppointmentCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Generate a list of session numbers (this should ideally come from your data model)
-    // For demonstration purposes, we're creating dummy session numbers
-    List<int> sessionNumbers = List.generate(
-      appointment.status == "completed" ? 4 : (appointment.status == "today" ? 4 : 2),
-      (index) => index + 1
-    );
+    // Generate session numbers safely
+    final sessionCount = appointment.status == "completed"
+        ? 4
+        : (appointment.status == "today" ? 4 : 2);
+    final sessionNumbers = List<int>.generate(sessionCount, (index) => index + 1);
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -50,7 +49,7 @@ class AppointmentCardWidget extends StatelessWidget {
                 backgroundColor: Colors.grey.shade200,
               ),
               SizedBox(width: 12),
-              
+
               // Patient Details
               Expanded(
                 child: Column(
@@ -66,14 +65,14 @@ class AppointmentCardWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "${appointment.age}, ${appointment.gender}",
+                      "${appointment.age ?? 'Age not specified'}, ${appointment.gender ?? 'Gender not specified'}",
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
                       ),
                     ),
                     Text(
-                      appointment.email,
+                      appointment.email ?? 'No email provided',
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[500],
@@ -82,7 +81,7 @@ class AppointmentCardWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // Time and Session Pills
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -90,25 +89,25 @@ class AppointmentCardWidget extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Color(0xFFD4A373).withOpacity(0.2), // Brown background
+                      color: Color(0xFFD4A373).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      appointment.time ?? "4:00 pm - 5:00 pm",
+                      appointment.time ?? "Time not specified",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFFD4A373), // Brown text
+                        color: Color(0xFFD4A373),
                       ),
                     ),
                   ),
                   SizedBox(height: 8),
                   Row(
-                    children: sessionNumbers.map((number) => 
-                      Padding(
-                        padding: EdgeInsets.only(left: 4),
-                        child: SessionPillWidget(number: number),
-                      )
+                    children: sessionNumbers.map((number) =>
+                        Padding(
+                          padding: EdgeInsets.only(left: 4),
+                          child: SessionPillWidget(number: number),
+                        )
                     ).toList(),
                   ),
                 ],
