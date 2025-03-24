@@ -1,11 +1,16 @@
 from flask import Flask, jsonify
 from pymongo import MongoClient
+from urllib.parse import quote_plus
 
 app = Flask(__name__)
 
 # Connect to MongoDB
-client = MongoClient("mongodb://localhost:27017/")
-db = client["therapist_dashboard"]
+username = quote_plus('shruti23doon')
+password = quote_plus('Shruti@23')
+dbname = 'therapist_dashboard'
+MONGODB_URI = f'mongodb+srv://{username}:{password}@patientdata.1807l.mongodb.net/{dbname}?retryWrites=true&w=majority'
+client = MongoClient(MONGODB_URI)
+db = client[dbname]
 appointments_collection = db["appointments"]
 
 @app.route("/appointments", methods=["GET"])
@@ -20,35 +25,34 @@ def insert_dummy_data():
     try:
         # Example dummy data
         dummy_data = [
-    {
-        "patientName": "Rupa Singh",
-        "email": "rupanirgh@gmail.com",
-        "age": "19",
-        "gender": "female",
-        "notes": "Follow-up for April.",
-        "status": "today"
-    },
-    {
-        "patientName": "Divya Bhaskar",
-        "email": "divyabhaskar@gmail.com",
-        "age": "23",
-        "gender": "female",
-        "notes": "Initial consultation.",
-        "status": "upcoming"
-    },
-    {
-        "patientName": "John Doe",
-        "email": "johndoe@gmail.com",
-        "age": "21",
-        "gender": "male",
-        "notes": "Routine checkup.",
-        "status": "completed"
-    }
-]
-
+            {
+                "patientName": "Rupa Singh",
+                "email": "rupanirgh@gmail.com",
+                "age": "19",
+                "gender": "female",
+                "notes": "Follow-up for April.",
+                "status": "today"
+            },
+            {
+                "patientName": "Divya Bhaskar",
+                "email": "divyabhaskar@gmail.com",
+                "age": "23",
+                "gender": "female",
+                "notes": "Initial consultation.",
+                "status": "upcoming"
+            },
+            {
+                "patientName": "John Doe",
+                "email": "johndoe@gmail.com",
+                "age": "21",
+                "gender": "male",
+                "notes": "Routine checkup.",
+                "status": "completed"
+            }
+        ]
         
-        # Insert into your MongoDB collection
-        result = db['your_collection_name'].insert_many(dummy_data)
+        # Insert into appointments collection
+        result = appointments_collection.insert_many(dummy_data)
         
         return jsonify({
             "message": "Dummy data inserted successfully",
