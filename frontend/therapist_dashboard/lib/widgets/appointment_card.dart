@@ -66,7 +66,7 @@ class AppointmentCardWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "${appointment.age}yrs, ${appointment.gender}",
+                      "${appointment.age}, ${appointment.gender}",
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
